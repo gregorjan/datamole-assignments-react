@@ -1,5 +1,5 @@
 {
-    "name": "ts-react-assignment-server",
+    "name": "@dar/server",
     "private": true,
     "version": "0.1.0",
     "scripts": {
