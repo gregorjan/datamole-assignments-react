@@ -1,5 +1,5 @@
 {
-    "name": "ts-react-assignment-client",
+    "name": "@dar/client",
     "private": true,
     "version": "0.2.0",
     "type": "module",
@@ -45,8 +45,5 @@
         "typescript": "^5.0.3",
         "vite": "^5.1.3",
         "vite-tsconfig-paths": "^4.0.8"
-    },
-    "volta": {
-        "node": "18.15.0"
     }
 }

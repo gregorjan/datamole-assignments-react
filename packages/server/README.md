@@ -3,8 +3,8 @@
 To run backend server:
 
 ```shell
-yarn install
-yarn dev
+pnpm run install
+pnpm run dev
 ```
 
 To check API, see documentation of `json-server`. The only implemented endpoint is `/items`.
