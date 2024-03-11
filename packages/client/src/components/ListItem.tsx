@@ -10,18 +10,26 @@ const StyledDiv = styled.div`
     display: flex;
     align-items: center;
     gap: 4px;
+    padding: 4px;
 
     ${Button} {
         opacity: 0;
         transition: opacity 0.3s ease;
     }
 
-    &:hover, &:focus-within {
+    &:hover,
+    &:focus-within {
+        background-color: ${(props) => props.theme.colors.blackA1};
         ${Button} {
             opacity: 1;
         }
     }
+`;
 
+const FormWrapper = styled.div`
+    flex-grow: 1;
+    display: flex;
+    margin-left: 11px;
 `;
 
 const Label = styled.label`
@@ -51,16 +59,18 @@ export const ListItem: React.FC<LiteeItemProp> = (props) => {
             <Checkbox checked={isDone} onCheckedChange={onItemDoneToggle} />
 
             {isEditing ? (
-                <Form onSubmit={onSubmit} onCancel={() => setIsEditing(false)} initialValue={label} />
+                <FormWrapper>
+                    <Form onSubmit={onSubmit} onCancel={() => setIsEditing(false)} initialValue={label} />
+                </FormWrapper>
             ) : (
                 <>
                     <Label>{label}</Label>
 
-                    <Button onClick={() => onItemDelete()}>
-                        <TrashIcon />
-                    </Button>
                     <Button onClick={() => setIsEditing(true)}>
                         <Pencil1Icon />
+                    </Button>
+                    <Button background="red" onClick={() => onItemDelete()}>
+                        <TrashIcon />
                     </Button>
                 </>
             )}

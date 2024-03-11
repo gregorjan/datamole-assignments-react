@@ -2,6 +2,7 @@ import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckboxProps } from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
 import styled from "styled-components";
+import { interactives } from "./styles/interactives";
 
 const CheckboxStyled = styled(CheckboxPrimitive.Root)`
     all: unset;
@@ -13,17 +14,13 @@ const CheckboxStyled = styled(CheckboxPrimitive.Root)`
     width: 25px;
     height: 25px;
 
-    background-color: white;
-    border-radius: 2px;
-    box-shadow: ${(props) => `0 2px 10px ${props.theme.colors.blackA7}`};
+    background-color: transparent;
+    border-radius: 4px;
 
-    &:hover {
-        background-color: ${(props) => props.theme.colors.grass3};
-    }
+    border: ${(props) => `2px solid ${props.theme.colors.blackA7}`};
 
-    &:focus {
-        box-shadow: 0 2px 10px black;
-    }
+    ${interactives}
+
 `;
 
 const CheckboxIndicator = styled(CheckboxPrimitive.Indicator)`
