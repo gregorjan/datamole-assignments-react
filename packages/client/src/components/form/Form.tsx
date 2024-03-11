@@ -9,7 +9,6 @@ const FormStyled = styled.form`
     display: flex;
     flex-grow: 1;
     gap: 4px;
-    margin-left: 11px;
 `;
 
 type FormProps = {
@@ -22,6 +21,8 @@ export const Form: FC<FormProps> = (props) => {
     const { initialValue, onSubmit, onCancel } = props;
 
     const [inputValue, setInputValue] = useState(initialValue);
+
+    //! TODO: Don't submit empty values, display warning instead
 
     return (
         <FormStyled
