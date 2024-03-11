@@ -56,7 +56,7 @@ export const ListItem: React.FC<LiteeItemProp> = (props) => {
 
     return (
         <StyledDiv>
-            <Checkbox checked={isDone} onCheckedChange={onItemDoneToggle} />
+            <Checkbox aria-label="Mark this item as done" checked={isDone} onCheckedChange={onItemDoneToggle} />
 
             {isEditing ? (
                 <FormWrapper>
@@ -67,10 +67,10 @@ export const ListItem: React.FC<LiteeItemProp> = (props) => {
                     <Label>{label}</Label>
 
                     <Button onClick={() => setIsEditing(true)}>
-                        <Pencil1Icon />
+                        <Pencil1Icon aria-label="Edit this item" />
                     </Button>
                     <Button background="red" onClick={() => onItemDelete()}>
-                        <TrashIcon />
+                        <TrashIcon aria-label="Delete this item" />
                     </Button>
                 </>
             )}
