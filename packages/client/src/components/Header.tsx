@@ -12,6 +12,7 @@ const StyledDiv = styled.header`
     margin-bottom: 20px;
 
     h1 {
+        margin-left: 15px;
         font-size: 20px;
         font-weight: 500;
     }
