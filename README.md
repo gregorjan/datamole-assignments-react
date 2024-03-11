@@ -30,7 +30,7 @@ Complete all the tasks below.
 
 ### Client Application
 
-More information about the client are in the `client/README.md`. Make sure you read them.
+More information about the client are in the `packages/client/README.md`. Make sure you read them.
 
 Using the provided UI components, implement the following modifications, bugfixes or new features (you can decide in what order):
 
@@ -45,7 +45,7 @@ _Fix all other bugs and visual imperfections you find._
 
 #### Features
 
--   [ ] **F1**: Default values in `Footer`
+-   [*] **F1**: Default values in `Footer`
     -   Modify the counters in `Footer` to show 0 when no value(s) are passed.
 -   [ ] **F2**: Load todo items
     -   After opening the application, todo items should be loaded from the server
