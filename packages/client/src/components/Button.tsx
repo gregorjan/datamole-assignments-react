@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+export const Button = styled.button<{ background?: "green" | "red" }>`
     all: unset;
 
     display: flex;
@@ -9,7 +9,11 @@ export const Button = styled.button`
 
     padding: 8px;
 
-    background-color: white;
+    background-color: ${({theme, background}) => {
+    if(background === "green") return theme.colors.grass4;
+    if(background === "red") return theme.colors.red4;
+    return 'white';
+}};
     border-radius: 4px;
     border: ${(props) => `2px solid ${props.theme.colors.blackA7}`};
 `;
