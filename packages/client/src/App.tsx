@@ -10,6 +10,10 @@ import { Item, deleteItem, fetcher, postItem, putItem } from "./utils/fetcher";
 import { ListItem } from "./components/ListItem";
 import { v1 as uuid } from "uuid";
 
+const sortItemsByDate = (a: Item, b: Item) => {
+    return b.createdAt - a.createdAt;
+};
+
 export const App = () => {
     const { data, error, isLoading, mutate } = useSWR<Item[]>("items", fetcher);
 
@@ -44,14 +48,12 @@ export const App = () => {
         mutate(data.filter((i) => i.id !== item.id));
     };
 
-    const sortedData = useMemo(() => {
-        return data?.sort((a, b) => {
-            if (a.isDone === b.isDone) {
-                a.createdAt - b.createdAt;
-            }
+    const todoItems = useMemo(() => {
+        return data?.filter((i) => !i.isDone).sort(sortItemsByDate);
+    }, [data]);
 
-            return Number(a.isDone) - Number(b.isDone);
-        });
+    const doneItems = useMemo(() => {
+        return data?.filter((i) => i.isDone).sort(sortItemsByDate);
     }, [data]);
 
     if (error) return <div>Failed to load</div>;
@@ -63,7 +65,16 @@ export const App = () => {
                 <Layout>
                     <Header onItemAdd={onItemAdd}>To Do app</Header>
                     <List>
-                        {sortedData?.map((item) => (
+                        {todoItems?.map((item) => (
+                            <ListItem
+                                key={item.id}
+                                {...item}
+                                onItemDelete={() => onItemDelete(item)}
+                                onItemLabelEdit={(label) => onItemEdit({ ...item, label })}
+                                onItemDoneToggle={(isDone) => onItemEdit({ ...item, isDone })}
+                            />
+                        ))}
+                        {doneItems?.map((item) => (
                             <ListItem
                                 key={item.id}
                                 {...item}
@@ -73,7 +84,7 @@ export const App = () => {
                             />
                         ))}
                     </List>
-                    <Footer />
+                    <Footer todoItems={todoItems?.length} doneItems={doneItems?.length} />
                 </Layout>
             </Container>
         </ThemeProvider>
