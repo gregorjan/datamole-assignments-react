@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Container } from "./components/Container";
 import { Layout } from "./components/Layout";
 import { List } from "./components/List";
@@ -7,18 +8,19 @@ import { ThemeProvider } from "./components/providers/ThemeProvider";
 import useSWR from "swr";
 import { Item, deleteItem, fetcher, postItem, putItem } from "./utils/fetcher";
 import { ListItem } from "./components/ListItem";
+import { v1 as uuid } from "uuid";
 
 export const App = () => {
     const { data, error, isLoading, mutate } = useSWR<Item[]>("items", fetcher);
 
     const onItemAdd = async (label: string) => {
-        if(!data) return
+        if (!data) return;
 
         const item = {
             label,
             isDone: false,
             createdAt: Date.now(),
-            id: (data?.length ?? 0) + 1,
+            id: uuid(),
         };
 
         await postItem(item);
@@ -27,7 +29,7 @@ export const App = () => {
     };
 
     const onItemEdit = async (item: Partial<Item>) => {
-        if(!data) return
+        if (!data) return;
 
         await putItem(item);
 
@@ -35,12 +37,22 @@ export const App = () => {
     };
 
     const onItemDelete = async (item: Item) => {
-        if(!data) return
+        if (!data) return;
 
         await deleteItem(item);
-      
+
         mutate(data.filter((i) => i.id !== item.id));
-      };
+    };
+
+    const sortedData = useMemo(() => {
+        return data?.sort((a, b) => {
+            if (a.isDone === b.isDone) {
+                a.createdAt - b.createdAt;
+            }
+
+            return Number(a.isDone) - Number(b.isDone);
+        });
+    }, [data]);
 
     if (error) return <div>Failed to load</div>;
     if (isLoading) return <div>Loading...</div>;
@@ -51,7 +63,7 @@ export const App = () => {
                 <Layout>
                     <Header onItemAdd={onItemAdd}>To Do app</Header>
                     <List>
-                        {data?.map((item) => (
+                        {sortedData?.map((item) => (
                             <ListItem
                                 key={item.id}
                                 {...item}
