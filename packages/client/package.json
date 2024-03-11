@@ -20,7 +20,8 @@
         "react-dom": "^18.2.0",
         "styled-components": "^6.1.8",
         "styled-normalize": "^8.0.7",
-        "styled-reset": "^4.4.2"
+        "styled-reset": "^4.4.2",
+        "swr": "^2.2.5"
     },
     "devDependencies": {
         "@storybook/addon-actions": "^7.0.2",
