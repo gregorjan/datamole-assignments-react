@@ -5,21 +5,32 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { ThemeProvider } from "./components/providers/ThemeProvider";
 import useSWR from "swr";
-import { Item, fetcher } from "./utils/fetcher";
+import { Item, fetcher, postItem } from "./utils/fetcher";
 import { ListItem } from "./components/ListItem";
 
 export const App = () => {
-    const { data, error, isLoading } = useSWR<Item[]>("items", fetcher);
+    const { data, error, isLoading, mutate } = useSWR<Item[]>("items", fetcher);
+
+    const onItemAdd = async (label: string) => {
+        const item = {
+            label,
+            isDone: false,
+            createdAt: Date.now(),
+            id: (data?.length ?? 0) + 1,
+        };
+        await postItem(item);
+
+        mutate(data ? [...data, item] : [item]);
+    };
 
     if (error) return <div>Failed to load</div>;
     if (isLoading) return <div>Loading...</div>;
 
-    console.log(data);
     return (
         <ThemeProvider>
             <Container>
                 <Layout>
-                    <Header onItemAdd={() => console.warn("unimplemented")}>To Do app</Header>
+                    <Header onItemAdd={onItemAdd}>To Do app</Header>
                     <List>
                         {data?.map((item) => (
                             <ListItem

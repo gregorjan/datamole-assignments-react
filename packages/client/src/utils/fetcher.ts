@@ -8,3 +8,13 @@ export type Item = {
     isDone: boolean;
     createdAt?: number;
 };
+
+export const postItem = async (item: Item) => {
+    await fetch(`${SERVER_URL}/items`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+    });
+};
