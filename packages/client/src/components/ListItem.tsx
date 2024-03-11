@@ -23,7 +23,7 @@ export type LiteeItemProp = {
     onItemDelete: () => void;
 };
 
-export const ListItem = (props: LiteeItemProp) => {
+export const ListItem: React.FC<LiteeItemProp> = (props) => {
     const [isEditing, setIsEditing] = useState(false);
     const { label, isDone, onItemLabelEdit, onItemDoneToggle, onItemDelete } = props;
 

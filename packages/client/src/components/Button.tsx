@@ -12,5 +12,4 @@ export const Button = styled.button`
     background-color: white;
     border-radius: 4px;
     border: ${(props) => `2px solid ${props.theme.colors.blackA7}`};
-
 `;
