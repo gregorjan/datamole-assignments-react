@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-const InputStyled = styled.input``;
+const InputStyled = styled.input`
+    flex-grow: 1;
+`;
 
 type InputProps = {
     value: string;

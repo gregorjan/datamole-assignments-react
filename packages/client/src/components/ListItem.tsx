@@ -9,10 +9,24 @@ import { Button } from "./Button";
 const StyledDiv = styled.div`
     display: flex;
     align-items: center;
+    gap: 4px;
+
+    ${Button} {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover, &:focus-within {
+        ${Button} {
+            opacity: 1;
+        }
+    }
+
 `;
 
 const Label = styled.label`
     margin-left: 15px;
+    flex-grow: 1;
 `;
 
 export type LiteeItemProp = {
@@ -39,14 +53,17 @@ export const ListItem: React.FC<LiteeItemProp> = (props) => {
             {isEditing ? (
                 <Form onSubmit={onSubmit} onCancel={() => setIsEditing(false)} initialValue={label} />
             ) : (
-                <Label>{label}</Label>
+                <>
+                    <Label>{label}</Label>
+
+                    <Button onClick={() => onItemDelete()}>
+                        <TrashIcon />
+                    </Button>
+                    <Button onClick={() => setIsEditing(true)}>
+                        <Pencil1Icon />
+                    </Button>
+                </>
             )}
-            <Button onClick={() => onItemDelete()}>
-                <TrashIcon />
-            </Button>
-            <Button onClick={() => setIsEditing(true)}>
-                <Pencil1Icon />
-            </Button>
         </StyledDiv>
     );
 };
