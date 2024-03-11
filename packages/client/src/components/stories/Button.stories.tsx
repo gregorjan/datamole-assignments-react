@@ -16,3 +16,16 @@ export const Default: Story = {
         children: "Button content",
     },
 };
+
+export const AllBackgrounds: Story = {
+    args: {
+        children: "Button content",
+    },
+    render: (args) => (
+        <>
+            <Button {...args} />
+            <Button {...args} background="red" />
+            <Button {...args} background="green" />
+        </>
+    ),
+};
