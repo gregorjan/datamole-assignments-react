@@ -2,6 +2,7 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import { ReactNode, useState } from "react";
 import styled from "styled-components";
 import { Form } from "./form";
+import { Button } from "./Button";
 
 const StyledDiv = styled.header`
     display: flex;
@@ -40,9 +41,9 @@ export const Header = (props: HeaderProps) => {
                 <h1>{children}</h1>
             )}
 
-            <button onClick={() => setIsEditing(true)}>
+            <Button onClick={() => setIsEditing(true)}>
                 <PlusIcon />
-            </button>
+            </Button>
         </StyledDiv>
     );
 };
