@@ -5,7 +5,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { ThemeProvider } from "./components/providers/ThemeProvider";
 import useSWR from "swr";
-import { Item, fetcher, postItem } from "./utils/fetcher";
+import { Item, fetcher, postItem, putItem } from "./utils/fetcher";
 import { ListItem } from "./components/ListItem";
 
 export const App = () => {
@@ -23,6 +23,12 @@ export const App = () => {
         mutate(data ? [...data, item] : [item]);
     };
 
+    const onItemEdit = async (item: Partial<Item>) => {
+        await putItem(item);
+
+        mutate(data ? data.map((i) => (i.id === item.id ? { ...i, ...item } : i)) : undefined);
+    };
+
     if (error) return <div>Failed to load</div>;
     if (isLoading) return <div>Loading...</div>;
 
@@ -37,7 +43,7 @@ export const App = () => {
                                 key={item.id}
                                 {...item}
                                 onItemDelete={() => console.warn("unimplemented")}
-                                onItemLabelEdit={() => console.warn("unimplemented")}
+                                onItemLabelEdit={(label) => onItemEdit({ ...item, label })}
                                 onItemDoneToggle={() => console.warn("unimplemented")}
                             />
                         ))}
