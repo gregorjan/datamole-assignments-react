@@ -3,22 +3,17 @@ import { ReactNode, useState } from "react";
 import styled from "styled-components";
 import { Form } from "./form";
 import { Button } from "./Button";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 
 const StyledDiv = styled.header`
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 
-    button {
-        all: unset;
-
-        width: 25px;
-        height: 25px;
-
-        background-color: ${(props) => props.theme.colors.grass9};
-        border: 1px solid;
-        border-color: ${(props) => props.theme.colors.olive9};
-        border-radius: 50%;
-
-        color: #fff;
+    h1 {
+        font-size: 20px;
+        font-weight: 500;
     }
 `;
 
@@ -36,14 +31,20 @@ export const Header = (props: HeaderProps) => {
     return (
         <StyledDiv>
             {isEditing ? (
-                <Form onSubmit={onItemAdd} onCancel={() => setIsEditing(false)} initialValue="" />
+                <>
+                    <VisuallyHidden.Root>
+                        <h1>{children}</h1>
+                    </VisuallyHidden.Root>
+                    <Form onSubmit={onItemAdd} onCancel={() => setIsEditing(false)} initialValue="" />
+                </>
             ) : (
-                <h1>{children}</h1>
+                <>
+                    <h1>{children}</h1>
+                    <Button background="green" onClick={() => setIsEditing(true)}>
+                        <PlusIcon aria-label="Open add new item form" />
+                    </Button>
+                </>
             )}
-
-            <Button onClick={() => setIsEditing(true)}>
-                <PlusIcon />
-            </Button>
         </StyledDiv>
     );
 };
