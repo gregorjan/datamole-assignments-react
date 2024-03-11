@@ -36,10 +36,10 @@ export const Form: FC<FormProps> = (props) => {
         >
             <Input value={inputValue} onValueChange={(value) => setInputValue(value)} />
             <Button background="green" type={"submit"}>
-                <CheckIcon />
+                <CheckIcon aria-label="Save this item" />
             </Button>
             <Button background="red" type={"reset"}>
-                <Cross1Icon />
+                <Cross1Icon aria-label="Close editing window" />
             </Button>
         </FormStyled>
     );

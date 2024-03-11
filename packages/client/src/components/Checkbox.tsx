@@ -7,6 +7,8 @@ import { interactives } from "./styles/interactives";
 const CheckboxStyled = styled(CheckboxPrimitive.Root)`
     all: unset;
 
+    flex-shrink: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;

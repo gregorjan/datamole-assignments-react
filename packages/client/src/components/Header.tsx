@@ -26,8 +26,13 @@ export const Header = (props: HeaderProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const { children, onItemAdd } = props;
 
-    //! TODO: fix A11Y
+    const onSubmit = (value: string) => {
+        onItemAdd(value);
+        setIsEditing(false);
+    };
 
+    //! TODO: fix A11Y
+    
     return (
         <StyledDiv>
             {isEditing ? (
@@ -35,7 +40,7 @@ export const Header = (props: HeaderProps) => {
                     <VisuallyHidden.Root>
                         <h1>{children}</h1>
                     </VisuallyHidden.Root>
-                    <Form onSubmit={onItemAdd} onCancel={() => setIsEditing(false)} initialValue="" />
+                    <Form onSubmit={onSubmit} onCancel={() => setIsEditing(false)} initialValue="" />
                 </>
             ) : (
                 <>
