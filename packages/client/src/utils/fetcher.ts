@@ -18,3 +18,13 @@ export const postItem = async (item: Item) => {
         body: JSON.stringify(item),
     });
 };
+
+export const putItem = async (item: Partial<Item>) => {
+    await fetch(`${SERVER_URL}/items/${item.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+    });
+};
