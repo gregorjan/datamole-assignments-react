@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const FooterStyled = styled.footer`
@@ -17,12 +16,12 @@ type FooterProps = {
 };
 
 export const Footer = (props: FooterProps) => {
-    const { todoItems, doneItems } = props;
+    const { todoItems = 0, doneItems = 0 } = props;
 
     return (
         <FooterStyled>
             Todo: {todoItems}
-            Done: {todoItems}
+            Done: {doneItems}
         </FooterStyled>
     );
 };
