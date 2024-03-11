@@ -10,6 +10,18 @@ const StyledDiv = styled.div`
     display: flex;
     align-items: center;
     gap: 4px;
+
+    ${Button} {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover, &:focus-within {
+        ${Button} {
+            opacity: 1;
+        }
+    }
+
 `;
 
 const Label = styled.label`
