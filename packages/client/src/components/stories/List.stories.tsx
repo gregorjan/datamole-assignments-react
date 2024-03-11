@@ -10,7 +10,7 @@ const meta = {
 } as Meta<typeof List>;
 export default meta;
 
-type Story = StoryObj<typeof ListItem>;
+type Story = StoryObj<typeof List>;
 
 const emptyHandlers: Pick<LiteeItemProp, "onItemLabelEdit" | "onItemDoneToggle" | "onItemDelete"> = {
     onItemLabelEdit: action("Edit requested"),
@@ -21,9 +21,9 @@ const emptyHandlers: Pick<LiteeItemProp, "onItemLabelEdit" | "onItemDoneToggle" 
 export const WithItems: Story = {
     args: {
         children: [
-            <ListItem {...emptyHandlers} label={"Lorem ipsum dolor"} isDone={false} />,
-            <ListItem {...emptyHandlers} label={"Nullam Adipiscing Ridiculus Fusce"} isDone={false} />,
-            <ListItem {...emptyHandlers} label={"Mattis Tristique Parturient "} isDone={true} />,
+            <ListItem {...emptyHandlers} key={0} label={"Lorem ipsum dolor"} isDone={false} />,
+            <ListItem {...emptyHandlers} key={1} label={"Nullam Adipiscing Ridiculus Fusce"} isDone={false} />,
+            <ListItem {...emptyHandlers} key={2} label={"Mattis Tristique Parturient "} isDone={true} />,
         ],
     },
 };

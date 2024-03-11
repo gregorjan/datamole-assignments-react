@@ -1,7 +1,7 @@
 module.exports = {
     parser: "@typescript-eslint/parser",
     parserOptions: {
-        project: "tsconfig.json",
+        project: ["tsconfig.json", "tsconfig.node.json"],
         sourceType: "module",
         tsconfigRootDir: __dirname,
     },
@@ -12,14 +12,22 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         "prettier",
         "plugin:storybook/recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
     ],
     root: true,
     env: {
         node: true,
         jest: true,
     },
-    ignorePatterns: [".eslintrc.js"],
+    settings: {
+        react: {
+            version: "detect",
+        },
+    },
+    ignorePatterns: [".eslintrc.cjs"],
     rules: {
+        "react/prop-types": "off",
         "@typescript-eslint/interface-name-prefix": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
