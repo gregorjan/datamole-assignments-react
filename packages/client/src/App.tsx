@@ -44,7 +44,7 @@ export const App = () => {
                                 {...item}
                                 onItemDelete={() => console.warn("unimplemented")}
                                 onItemLabelEdit={(label) => onItemEdit({ ...item, label })}
-                                onItemDoneToggle={() => console.warn("unimplemented")}
+                                onItemDoneToggle={(isDone) => onItemEdit({ ...item, isDone })}
                             />
                         ))}
                     </List>
